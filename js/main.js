@@ -6,8 +6,10 @@ $(function(){
 	var video;
 
 	window.onload = function() {
-		playlist = ["videos/huru.mp4",
-					"videos/coding.mp4"
+		playlist = [
+					"videos/coding.mp4",
+					"videos/huru.mp4",
+					"videos/wine.mp4"
 					];
 		video = document.getElementById('video');
 		video.addEventListener("ended", nextVideo,false);
@@ -26,6 +28,19 @@ $(function(){
 		video.load();
 		video.play();
 	}
+
+	$scrollDown = $("#scroll-down");
+	$cv = $('.cv-dl a');
+
+	/* up down icon effect */
+	function scrollDownAnimate(){
+		$scrollDown.animate({'bottom' : '35px'},1000,'easeOutSine').animate({'bottom' : '15px'},1000,'easeOutSine',scrollDownAnimate);
+	}
+	function cvAnimate(){
+		$cv.animate({'bottom' : '75px'},1000,'easeOutSine').animate({'bottom' : '55px'},1000,'easeOutSine',cvAnimate);
+	}
+	scrollDownAnimate();
+	cvAnimate();
 
 	//About Section
 
@@ -81,6 +96,7 @@ $(function(){
 
 	$(document).ready(function(){
 		$(window).trigger('resize');
+		$(window).trigger('scroll');
 	});
 
 	$(window).scroll(function(){
@@ -205,13 +221,15 @@ $(function(){
 		$contactClick.show();
 	});
 
-	$targetIcon.on('mouseenter', function(event) {
-		//showText($(this));
-		//kick($(this));
-	});
-	$targetIcon.on('mouseleave', function(event) {
-		//hideText($(this));
-		//pullBack($(this));
+
+	/*cv effect*/
+	$(window).scroll(function(){
+		if($(window).scrollTop() < $kv.height() + $kv.offset().top){
+			$cv.hide();
+		}
+		else{
+			$cv.show();
+		}
 	});
 
 	function showText(obj){

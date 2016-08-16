@@ -475,6 +475,20 @@ h3{
 	position:relative;
 	float:left;
 }
+.contact-nav{
+	text-align: center;
+}
+.cv-dl a{
+	position: fixed;
+	display: block;
+	font-size: 0;
+	width: 80px;
+	height: 80px;
+	bottom: 100px;
+	right: 10px;
+	background: url('../img/cv_download.png');
+	background-size: 80px 80px;
+}
 @media (max-width: 768px) {
 	.path-block,
 	.mask,
@@ -482,7 +496,8 @@ h3{
 	.click-contact,
 	.prev-block,
 	.next-block,
-	#scroll-down{
+	#scroll-down,
+	.contact-nav{
 		display: none!important;
 	}
 	.control-bar{
@@ -541,13 +556,32 @@ h3{
 	.slides img{
 		height: 100%;
 	}
+	.cv-dl a{
+		position: initial;
+		margin: 0 auto;
+		bottom: 0;
+	}
+	.cv-dl{
+		text-align: center;
+		padding: 60px 0;
+	}
+	.cv-dl:after{
+		font-family: '微軟正黑體',sans-serif;
+		text-align: center;
+		color: #16485D;
+		font-size: 26px;
+		line-height: 46px;
+		font-weight: bold; 
+		content: 'Download My C.V. file!';
+	}
 }
 @media (min-width: 769px) and (max-width: 991px) {
 	.path-block,
 	.click-contact,
 	.prev-block,
 	.next-block,
-	#scroll-down{
+	#scroll-down,
+	.contact-nav{
 		display: none!important;
 	}
 	.control-bar{
@@ -599,6 +633,24 @@ h3{
 	}
 	.skills:before{
 		top: 8px;
+	}
+	.cv-dl a{
+		position: initial;
+		margin: 0 auto;
+		bottom: 0;
+	}
+	.cv-dl{
+		text-align: center;
+		padding: 60px 0;
+	}
+	.cv-dl:after{
+		font-family: '微軟正黑體',sans-serif;
+		text-align: center;
+		color: #16485D;
+		font-size: 26px;
+		line-height: 46px;
+		font-weight: bold; 
+		content: 'Download My C.V. file!';
 	}
 }
 @media (min-width: 992px) and (max-width: 1200px) {
