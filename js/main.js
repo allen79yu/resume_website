@@ -221,10 +221,11 @@ $(function(){
 		$contactClick.show();
 	});
 
+	$skillAnchor = $('#skills-title');
 
 	/*cv effect*/
 	$(window).scroll(function(){
-		if($(window).scrollTop() < $kv.height() + $kv.offset().top){
+		if($(window).scrollTop() < $skillAnchor.height() + $skillAnchor.offset().top){
 			$cv.hide();
 		}
 		else{
