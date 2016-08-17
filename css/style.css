@@ -110,10 +110,11 @@ h3{
 	position: absolute;
     bottom: 15px;
     background: url('../img/scroll_down.png');
-    width: 82px;
-    height: 111px;
+    background-size: 60px 82px; 
+    width: 60px;
+    height: 82px;
     left: 50%;
-    margin: 0 0 0 -55px;
+    margin: 0 0 0 -41px;
     z-index: 2;
 }
 /* about */
@@ -289,7 +290,7 @@ h3{
 .outter{
     overflow: hidden;
     width: 425px;
-    margin: 20px auto;
+    margin: 20px;
 }
 .slide-block{
 	height: 400px;
