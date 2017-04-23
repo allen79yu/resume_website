@@ -1,0 +1,8 @@
+bower_components/
+node_modules/
+
+app/build/
+!app/build/.gitkeep
+
+npm-debug.log
+.DS_Store
