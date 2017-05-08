@@ -1,29 +1,29 @@
 $(function() {
     //Video Section
 
-    var position = 0;
-    var playlist;
-    var video;
+    // var position = 0;
+    // var playlist;
+    // var video;
 
-    window.onload = function() {
-        playlist = ["videos/coding.mp4", "videos/huru.mp4", "videos/wine.mp4"];
-        video = document.getElementById("video");
-        video.addEventListener("ended", nextVideo, false);
+    // window.onload = function() {
+    //     playlist = ["videos/coding.mp4", "videos/huru.mp4", "videos/wine.mp4"];
+    //     video = document.getElementById("video");
+    //     video.addEventListener("ended", nextVideo, false);
 
-        video.src = playlist[position];
-        video.load();
-        video.play();
-    };
+    //     video.src = playlist[position];
+    //     video.load();
+    //     video.play();
+    // };
 
-    function nextVideo() {
-        position++;
-        if (position >= playlist.length) {
-            position = 0;
-        }
-        video.src = playlist[position];
-        video.load();
-        video.play();
-    }
+    // function nextVideo() {
+    //     position++;
+    //     if (position >= playlist.length) {
+    //         position = 0;
+    //     }
+    //     video.src = playlist[position];
+    //     video.load();
+    //     video.play();
+    // }
 
     $scrollDown = $("#scroll-down");
     $cv = $(".cv-dl a");
