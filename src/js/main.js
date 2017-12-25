@@ -1,3 +1,7 @@
+import "jquery.easing";
+import "../css/reset.css";
+import "../css/style.css";
+
 $(function() {
     //Video Section
 
@@ -25,8 +29,8 @@ $(function() {
     //     video.play();
     // }
 
-    $scrollDown = $("#scroll-down");
-    $cv = $(".cv-dl a");
+    const $scrollDown = $("#scroll-down");
+    const $cv = $(".cv-dl a");
 
     /* up down icon effect */
     function scrollDownAnimate() {
@@ -48,16 +52,17 @@ $(function() {
     $(".path-block").css("height", dHeight + "px");
 
     /*Value Setting*/
-    var $about = $(".about-section"),
+    let $about = $(".about-section"),
         winMiddle = $(window).height() / 2,
         $aboutPic = $about.find(".profile-pic"),
         aboutPicMid = $aboutPic.height() / 2,
         $last = $about.find(".abouts").last(),
         $first = $about.find(".abouts").first();
-    (lastMidOffset =
-        $last.offset().top +
-        $last.height() /
-            2), (firstMidOffset = $first.offset().top + $first.height() / 2), ($sample = $(".top-pic")), ($topPic = $(".top-pic img")), ($bottomPic = $(".bottom-pic img"));
+    let lastMidOffset = $last.offset().top + $last.height() / 2;
+    let firstMidOffset = $first.offset().top + $first.height() / 2;
+    let $sample = $(".top-pic");
+    let $topPic = $(".top-pic img");
+    let $bottomPic = $(".bottom-pic img");
 
     $aboutPic.hide();
     $topPic.hide();
@@ -128,18 +133,32 @@ $(function() {
     /* Get About */
     function getAbout(index, attr) {
         if (attr == "top") {
-            return $about.find(".abouts").eq(index).offset().top;
+            return $about
+                .find(".abouts")
+                .eq(index)
+                .offset().top;
         }
         if (attr == "outer") {
-            return $about.find(".abouts").eq(index).outerHeight() / 2;
+            return (
+                $about
+                    .find(".abouts")
+                    .eq(index)
+                    .outerHeight() / 2
+            );
         } else {
             return $about.find(".abouts").eq(index);
         }
     }
     /* Pop out function */
     function popout(index) {
-        $about.find(".abouts").eq(index).animate({ opacity: "1.0" }, 300);
-        $about.find(".abouts").eq(index).addClass("open");
+        $about
+            .find(".abouts")
+            .eq(index)
+            .animate({ opacity: "1.0" }, 300);
+        $about
+            .find(".abouts")
+            .eq(index)
+            .addClass("open");
     }
     //Portfolio Section Effect
     $(".slide-block").each(function() {
@@ -215,7 +234,7 @@ $(function() {
         $contactClick.show();
     });
 
-    $skillAnchor = $("#skills-title");
+    const $skillAnchor = $("#skills-title");
 
     /*cv effect*/
     $(window).scroll(function() {
@@ -227,15 +246,29 @@ $(function() {
     });
 
     function showText(obj) {
-        obj.nextAll().stop(true).animate({ opacity: "1.0" }, 300);
+        obj
+            .nextAll()
+            .stop(true)
+            .animate({ opacity: "1.0" }, 300);
     }
     function hideText(obj) {
-        obj.nextAll().stop(true).animate({ opacity: "0.0" }, 300);
+        obj
+            .nextAll()
+            .stop(true)
+            .animate({ opacity: "0.0" }, 300);
     }
     function kick(obj) {
-        obj.parent().next().stop(true).animate({ "margin-left": "100px" }, 300);
+        obj
+            .parent()
+            .next()
+            .stop(true)
+            .animate({ "margin-left": "100px" }, 300);
     }
     function pullBack(obj) {
-        obj.parent().next().stop(true).animate({ "margin-left": "0px" }, 300);
+        obj
+            .parent()
+            .next()
+            .stop(true)
+            .animate({ "margin-left": "0px" }, 300);
     }
 });
