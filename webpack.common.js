@@ -7,7 +7,7 @@ module.exports = {
         app: ["./src/js/main.js"]
     },
     output: {
-        path: `${__dirname}/build`,
+        path: `${__dirname}/doc`,
         filename: "[name].[hash].js"
     },
     resolve: {
