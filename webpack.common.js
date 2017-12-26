@@ -63,7 +63,7 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                loader: "html-loader",
+                loader: "html-loader?attrs[]=video:src&attrs[]=img:src&attrs[]=a:data-href",
                 include: [path.resolve(__dirname, "src/")],
                 exclude: /(node_modules|bower_components)/
             },

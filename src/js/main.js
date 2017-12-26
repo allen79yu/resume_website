@@ -237,6 +237,10 @@ $(function() {
     const $skillAnchor = $("#skills-title");
 
     /*cv effect*/
+    $cv.on("click", event => {
+        window.location = $(event.target).attr("data-href");
+    });
+
     $(window).scroll(function() {
         if ($(window).scrollTop() < $skillAnchor.height() + $skillAnchor.offset().top) {
             $cv.hide();
