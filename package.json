@@ -4,7 +4,7 @@
     "description": "resume",
     "main": "index.js",
     "scripts": {
-        "clean:build": "rimraf -- docs",
+        "clean:build": "rimraf -- build",
         "dev": "NODE_ENV=localDev webpack-dev-server --config webpack.dev.js --progress --inline ",
         "prebuild:prod": "npm run clean:build",
         "build:prod": "NODE_ENV=production webpack --config webpack.prod.js --progress --hide-modules -p"
