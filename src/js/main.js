@@ -1,6 +1,6 @@
 import "jquery.easing";
 import "../css/reset.css";
-import "../css/style.css";
+import "../css/style.scss";
 
 $(function() {
     //Video Section
