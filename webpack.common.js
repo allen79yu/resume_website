@@ -9,8 +9,7 @@ module.exports = {
     },
     output: {
         path: `${__dirname}/build`,
-        filename: "[name].[hash].js",
-        publicPath: "https://allen79yu.github.io/resume_website/"
+        filename: "[name].[hash].js"
     },
     resolve: {
         extensions: [".js"]

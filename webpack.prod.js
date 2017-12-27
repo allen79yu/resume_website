@@ -13,6 +13,9 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = merge(common, {
+    output: {
+        publicPath: "https://allen79yu.github.io/resume_website/"
+    },
     plugins: [
         HTMLWebpackPluginConfig,
         new webpack.DefinePlugin({
