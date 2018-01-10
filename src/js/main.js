@@ -170,7 +170,7 @@ $(function() {
             $prev = $(".prev"),
             $next = $(".next"),
             currentIndex = 0,
-            slideCount = 6,
+            slideCount = 8,
             interval = 7000,
             duration = 500,
             easing = "easeInOut",

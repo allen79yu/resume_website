@@ -305,11 +305,11 @@ h3 {
         background-size: cover;
     }
     &.cellwine-marketplace {
-        background: #000 url("../img/aid.jpg") no-repeat center;
-        background-size: cover;
+        background: #000 url("../img/marketplace.jpg") no-repeat center;
+        background-size: contain;
     }
     &.tt-tt {
-        background: #000 url("../img/aid.jpg") no-repeat center;
+        background: #000 url("../img/tt.jpg") no-repeat center;
         background-size: cover;
     }
     &.cet {
@@ -423,6 +423,22 @@ h3 {
     display: none;
     height: 104px;
 }
+/* portfolio list*/
+.portfolio-grid-section {
+    .portfolio-list {
+        text-align: center;
+        font-size: 24px;
+    }
+    .portfolio-image {
+        width: 100%;
+        height: 200px;
+        &.tidf {
+            background: #000 url("../img/tidf.jpg") no-repeat center;
+            background-size: cover;
+        }
+    }
+}
+
 /*contact*/
 .contact {
     background: #4c4c4c;
