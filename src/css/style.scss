@@ -114,6 +114,10 @@ h3 {
 .abouts {
     margin: 80px 0;
     opacity: 0;
+    h3 {
+        margin: 12px 0;
+        font-size: 24px;
+    }
     p {
         line-height: 34px;
     }
@@ -426,15 +430,81 @@ h3 {
 /* portfolio list*/
 .portfolio-grid-section {
     .portfolio-list {
+        color: #103646;
         text-align: center;
-        font-size: 24px;
+        font-size: 36px;
+        margin: 24px;
+    }
+    a {
+        text-decoration: none;
     }
     .portfolio-image {
         width: 100%;
         height: 200px;
+        .hover-overlay {
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            height: 100%;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.675);
+            p {
+                margin-top: 12px;
+                padding: 6px 12px;
+                border: 2px #fff solid;
+            }
+        }
+        &:hover {
+            .hover-overlay {
+                opacity: 1;
+                font-size: 24px;
+            }
+        }
         &.tidf {
             background: #000 url("../img/tidf.jpg") no-repeat center;
             background-size: cover;
+        }
+        &.cellwine-marketplace {
+            background: #000 url("../img/marketplace.jpg") no-repeat center;
+            background-size: contain;
+        }
+        &.tt-tt {
+            background: #000 url("../img/tt.jpg") no-repeat center;
+            background-size: cover;
+        }
+        &.cet {
+            background: #000 url("../img/cet.jpg") no-repeat center;
+            background-size: cover;
+        }
+        &.hennessy {
+            background: #000 url("../img/hennessy.jpg") no-repeat center;
+            background-size: cover;
+        }
+        &.aid {
+            background: #000 url("../img/aid.jpg") no-repeat center;
+            background-size: cover;
+        }
+        &.im {
+            background: #000 url("../img/im.jpg") no-repeat center;
+            background-size: cover;
+        }
+        &.gtk {
+            background: #000 url("../img/gtk.jpg") no-repeat center;
+            background-size: cover;
+        }
+    }
+    .portfolio-brief {
+        box-sizing: border-box;
+        height: 280px;
+        margin-bottom: 24px;
+        p {
+            line-height: 30px;
+            padding: 24px;
         }
     }
 }
@@ -631,6 +701,7 @@ h3 {
     }
     .slides-description {
         padding: 0;
+        height: 200px;
     }
     .outter {
         margin: 0 auto;
