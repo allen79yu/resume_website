@@ -706,6 +706,14 @@ h3 {
     .outter {
         margin: 0 auto;
     }
+    .portfolio-grid-section {
+        .portfolio-image {
+            .hover-overlay {
+                opacity: 1;
+                font-size: 24px;
+            }
+        }
+    }
 }
 @media (min-width: 769px) and (max-width: 991px) {
     .path-block,
@@ -796,6 +804,14 @@ h3 {
     }
     .outter {
         margin: 20px auto;
+    }
+    .portfolio-grid-section {
+        .portfolio-image {
+            .hover-overlay {
+                opacity: 1;
+                font-size: 24px;
+            }
+        }
     }
 }
 @media (min-width: 992px) and (max-width: 1200px) {
