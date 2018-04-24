@@ -1,6 +1,6 @@
 import "jquery.easing";
 import "../css/reset.css";
-import "../css/style.css";
+import "../css/style.scss";
 
 $(function() {
     //Video Section
@@ -170,7 +170,7 @@ $(function() {
             $prev = $(".prev"),
             $next = $(".next"),
             currentIndex = 0,
-            slideCount = 6,
+            slideCount = 8,
             interval = 7000,
             duration = 500,
             easing = "easeInOut",
@@ -237,6 +237,7 @@ $(function() {
     const $skillAnchor = $("#skills-title");
 
     /*cv effect*/
+
     $(window).scroll(function() {
         if ($(window).scrollTop() < $skillAnchor.height() + $skillAnchor.offset().top) {
             $cv.hide();

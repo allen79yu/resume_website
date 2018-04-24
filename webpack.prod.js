@@ -7,12 +7,15 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     template: `${__dirname}/src/index.html`,
-    filename: "../index.html",
+    filename: "index.html",
     inject: "body",
     favicon: "./src/favicon.ico"
 });
 
 module.exports = merge(common, {
+    output: {
+        publicPath: "https://allen79yu.github.io/resume_website/"
+    },
     plugins: [
         HTMLWebpackPluginConfig,
         new webpack.DefinePlugin({
