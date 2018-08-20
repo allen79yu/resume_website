@@ -6,7 +6,7 @@
   "scripts": {
     "clean:build": "rimraf -- build",
     "dev": "NODE_ENV=localDev webpack-dev-server --config webpack.dev.js --progress --inline ",
-    "prebuild:prod": "npm run clean:build",
+    "prebuild": "npm run clean:build",
     "build": "NODE_ENV=production webpack --config webpack.prod.js --progress --hide-modules -p"
   },
   "repository": {
