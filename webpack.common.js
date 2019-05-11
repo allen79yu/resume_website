@@ -69,7 +69,7 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/
             },
             {
-                test: /\.(jpe?g|png|gif|mp4|pdf|ico)$/i,
+                test: /\.(jpe?g|png|gif|mp4|mov|pdf|ico)$/i,
                 loader: "url-loader",
                 exclude: /app.js/,
                 query: {
