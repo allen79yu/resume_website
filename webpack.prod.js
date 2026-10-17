@@ -25,14 +25,6 @@ module.exports = merge(common, {
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new ExtractTextPlugin('[name].[hash].css'),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-      filename: '[name].[hash].js'
-    }),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: {

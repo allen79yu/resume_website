@@ -3,7 +3,7 @@
 
 <head>
 	<meta property="og:site_name" content="ALLEN YU | Resume Site" />
-	<meta property="og:image" content="${require(`img/huru.jpg`)}" />
+	<meta property="og:image" content="${require(`./img/huru.jpg`)}" />
 	<meta property="og:title" content="ALLEN YU | Resume Site" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://allen79yu.github.io/resume_website/" />
@@ -12,6 +12,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ALLEN YU | Resume Site</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 
 </head>
 
@@ -19,9 +22,8 @@
 	<div id="main-menu" class="fixed">
 		<div class="wrap">
 			<h1>
-				<a id="logo" href="index.html"></a>
+				<a id="logo" href="index.html">Allen Yu</a>
 			</h1>
-			<div class="click-contact">Contact Me!</div>
 			<div class="contact-circle">
 				<div class="icon-container">
 					<a href="https://www.facebook.com/allen.yu.965" target="_blank" class="contact-icon"
@@ -52,7 +54,7 @@
 			I AM ALLEN
 		</div>
 		<div id="scroll-down"></div>
-		<video id="video" src="videos/coding.mp4" autoplay loop muted playsinline>
+		<video id="video" src="./videos/coding.mp4" autoplay loop muted playsinline>
 			Your browser does not support the video tag.
 		</video>
 	</div>
@@ -62,14 +64,8 @@
 			<h2 id="about-title" class="title">About</h2>
 			<div class="about col-lg-12 col-md-12">
 				<div class="path-block col-lg-4 col-md-4">
-					<div class="top-pic">
-						<img src="img/profile.jpg" />
-					</div>
-					<div class="profile-pic profile-pic-fixed">
-						<img src="img/profile.jpg" />
-					</div>
-					<div class="bottom-pic">
-						<img src="img/profile.jpg" />
+					<div class="profile-pic">
+						<img src="./img/profile.jpg" alt="Allen Yu" />
 					</div>
 				</div>
 				<div class="description-block col-lg-8 col-md-8">
@@ -109,7 +105,7 @@
 			<div class="skills col-lg-12 col-md-12">
 				<h3>程式語言</h3>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_html.png" alt="">
+					<img src="./img/skill_icons/icons_html.png" alt="">
 					<h4>HTML</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -117,7 +113,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_css.png" alt="">
+					<img src="./img/skill_icons/icons_css.png" alt="">
 					<h4>CSS</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -125,7 +121,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_js.png" alt="">
+					<img src="./img/skill_icons/icons_js.png" alt="">
 					<h4>Javascript</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -133,7 +129,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_php.png" alt="">
+					<img src="./img/skill_icons/icons_php.png" alt="">
 					<h4>PHP</h4>
 					<div class="level-bar">
 						<div class="bar bar-60"></div>
@@ -145,7 +141,7 @@
 			<div class="skills col-lg-12 col-md-12">
 				<h3>函式庫 & 框架</h3>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_jquery.png" alt="">
+					<img src="./img/skill_icons/icons_jquery.png" alt="">
 					<h4>jQuery</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -153,7 +149,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_bootstrap.png" alt="">
+					<img src="./img/skill_icons/icons_bootstrap.png" alt="">
 					<h4>Bootstrap</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -161,7 +157,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_sass.png" alt="">
+					<img src="./img/skill_icons/icons_sass.png" alt="">
 					<h4>SASS</h4>
 					<div class="level-bar">
 						<div class="bar bar-60"></div>
@@ -169,7 +165,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_vue.png" alt="">
+					<img src="./img/skill_icons/icons_vue.png" alt="">
 					<h4>Vue.js</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -177,7 +173,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_react.js.png" alt="">
+					<img src="./img/skill_icons/icons_react.js.png" alt="">
 					<h4>React.js</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -189,7 +185,7 @@
 			<div class="skills col-lg-12 col-md-12">
 				<h3>其他</h3>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_firebase.png" alt="">
+					<img src="./img/skill_icons/icons_firebase.png" alt="">
 					<h4>firebase</h4>
 					<div class="level-bar">
 						<div class="bar bar-60"></div>
@@ -197,7 +193,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_drupal.png" alt="">
+					<img src="./img/skill_icons/icons_drupal.png" alt="">
 					<h4>Drupal</h4>
 					<div class="level-bar">
 						<div class="bar bar-80"></div>
@@ -205,7 +201,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_unity.png" alt="">
+					<img src="./img/skill_icons/icons_unity.png" alt="">
 					<h4>Unity</h4>
 					<div class="level-bar">
 						<div class="bar bar-60"></div>
@@ -213,7 +209,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="skill-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-					<img src="img/skill_icons/icons_photoshop.png" alt="">
+					<img src="./img/skill_icons/icons_photoshop.png" alt="">
 					<h4>Photoshop</h4>
 					<div class="level-bar">
 						<div class="bar bar-60"></div>
@@ -224,101 +220,8 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-		<div class='portfolio-section'>
-			<h2 id="portfolio-title" class="title">Portfolio</h2>
-			<div class="prev-block col-lg-1 col-md-1 col-sm-12 col-xs-12">
-				<a class="prev">prev</a>
-			</div>
-			<div class="slide-block col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				<div class="mask"></div>
-				<div class="back-mask"></div>
-				<div class="outter">
-					<div class="slide">
-						<div class="slides songhub">
-						</div>
-						<div class="slides tidf">
-						</div>
-						<div class="slides cellwine-marketplace">
-						</div>
-						<div class="slides tt-tt">
-						</div>
-						<div class="slides cet">
-						</div>
-						<div class="slides hennessy">
-						</div>
-						<div class="slides aid">
-						</div>
-						<div class="slides im">
-						</div>
-						<div class="slides gtk">
-						</div>
-						<div class="clear"></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-				<div class='control-bar'>
-					<a class="prev">prev</a>
-					<a class="next">next</a>
-					<div class="clear"></div>
-				</div>
-				<div class="description">
-					<div class="slides-description">
-						<h3>SongHub</h3>
-						<p>與朋友們發想實作的side project，songhub是一個點歌chatbot，可以透過line指令讓多人共同點歌，一起聽音樂。有點歌、插歌、切歌多種指令可以使用。</p>
-					</div>
-					<div class="slides-description">
-						<h3>台灣國際紀錄片影展</h3>
-						<p>
-							於
-							<a href="http://www.netivism.com.tw">網絡行動科技 Netivism</a>
-							實習時所參與的專案。影展由雙年展改為年年展，因此欲建立可長期使用的網站，擁有消息公布與影片放映個人活動行事曆等功能。</p>
-					</div>
-					<div class="slides-description">
-						<h3>CellWine Marketplace</h3>
-						<p>CellWine App中的Webview專案，運用Vue.js搭建，與App交換資料，快速完成跨平台的葡萄酒詢價媒合平台。</p>
-					</div>
-					<div class="slides-description">
-						<h3>國際物流碁磐資訊平台</h3>
-						<p>查詢海空運物流資訊平台，負責版面開發運用jQuery搭配webpack打包，交給搭配工程師完成資料Binding與後端整合。</p>
-					</div>
-					<div class="slides-description">
-						<h3>地球公民基金會</h3>
-						<p>
-							地球公民基金會為專注於環境環保議題的NPO組織。網站為新站專案，我負責將舊網站的資料整合匯出，並建立新的網站。配合視覺設計，新網站首頁設計為Metro風格的RWD網頁。
-						</p>
-					</div>
-					<div class="slides-description">
-						<h3>軒尼詩2017限定活動網站</h3>
-						<p>
-							2017年限定版商品活動宣傳網站，介紹商品設計理念以及串接商品預訂的功能，與視覺設計師配合完成。
-						</p>
-					</div>
-					<div class="slides-description">
-						<h3>台灣海外援助發展聯盟</h3>
-						<p>
-							台灣海外援助聯盟為專注於海外慈善專案的NPO組織。網頁中不少地方透過串接google map作為呈現方式，展現世界各地都有正在執行的慈善專案需要幫助。
-						</p>
-					</div>
-					<div class="slides-description">
-						<h3>國立高雄大學資訊管理學系</h3>
-						<p>從網站建置到視覺設計皆親自執行，同時必須匯入舊有資料進行更新。除了前端頁面後台也新增了一些功能，方便匯出系所相關資料，以便系所評鑑時可用。(現行網頁已經再度更新)</p>
-					</div>
-					<div class="slides-description">
-						<h3>貴子坑水土保持教學園區</h3>
-						<p>
-							貴子坑為北投的環境生態園區，由大地工程處發包，建置網頁以利資訊公布。網站以綠意盎然及童趣的視覺設計為主軸，功能簡易可清楚獲得該園區相關活動消息。
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="next-block col-lg-1 col-md-1 col-sm-12 col-xs-12">
-				<a class="next">next</a>
-			</div>
-			<div class="clear"></div>
-		</div>
 		<div class="portfolio-grid-section">
-			<h2 class="portfolio-list">Portfolio Links</h2>
+			<h2 id="portfolio-title" class="title">Portfolio</h2>
 			<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 				<a href="https://songhub.netlify.app" target="_blank">
 					<div class="portfolio-image">
@@ -439,7 +342,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="contact-nav">
-			<img src="img/cv_navigate.png" alt="">
+			<img src="./img/chevron-down.svg" alt="" />
 		</div>
 		<div class="cv-dl">
 			<a href="https://www.cakeresume.com/s--NhXj1STv4Ll1RaVfCAsXlg--/airbk24" target="__blank">Download CV!</a>
