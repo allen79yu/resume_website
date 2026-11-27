@@ -54,7 +54,10 @@
 			I AM ALLEN
 		</div>
 		<div id="scroll-down"></div>
-		<img id="hero-image" src="./img/hero-landscape.jpg" alt="" aria-hidden="true" />
+		<picture>
+			<source media="(max-aspect-ratio: 1/1)" srcset="${require('./img/hero-longboard-portrait.jpg')}" />
+			<img id="hero-image" src="./img/hero-longboard-landscape.jpg" alt="" aria-hidden="true" />
+		</picture>
 	</div>
 	<div class="wrap">
 		<div class="clear"></div>
