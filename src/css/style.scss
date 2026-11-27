@@ -151,11 +151,17 @@ h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    // Keep the sun and the ridge it rests on in frame on narrow screens.
-    object-position: 75% 50%;
-    filter: grayscale(1) contrast(1.05) brightness(0.8);
+    // Landscape art: shoes and board sit right of centre, leaving the
+    // blurred road bottom-left for the headline. Bias the crop towards them.
+    object-position: 62% 50%;
+    filter: grayscale(1) contrast(1.05) brightness(0.9);
     // A slow settle replaces the motion the video used to provide.
     animation: hero-settle 2.4s $ease both;
+    // Portrait art (served by <picture> on the same query): the palm near
+    // the road sits low, so favour the lower part when height gets cropped.
+    @media (max-aspect-ratio: 1/1) {
+        object-position: 50% 60%;
+    }
 }
 @keyframes hero-settle {
     from {
