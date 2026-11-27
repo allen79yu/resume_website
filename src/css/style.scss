@@ -134,22 +134,43 @@ h3 {
     color: $ink;
     overflow: hidden;
 }
-#video-mask {
+#hero-mask {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(11, 11, 10, 0.55) 0%, rgba(11, 11, 10, 0.3) 45%, rgba(11, 11, 10, 0.85) 100%);
+    background: linear-gradient(180deg, rgba(11, 11, 10, 0.45) 0%, rgba(11, 11, 10, 0.15) 45%, rgba(11, 11, 10, 0.8) 100%);
     z-index: 1;
 }
-#video {
-    filter: grayscale(1) contrast(1.05) brightness(0.65);
-    object-fit: cover;
+#hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    overflow: hidden;
+    object-fit: cover;
+    // Keep the sun and the ridge it rests on in frame on narrow screens.
+    object-position: 75% 50%;
+    filter: grayscale(1) contrast(1.05) brightness(0.8);
+    // A slow settle replaces the motion the video used to provide.
+    animation: hero-settle 2.4s $ease both;
+}
+@keyframes hero-settle {
+    from {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    #hero-image {
+        animation: none;
+    }
 }
 #slogan {
     position: absolute;
@@ -273,21 +294,44 @@ h3 {
         position: relative;
         float: left;
         padding: 18px 0;
+        // Fixed slots instead of floats: icon on the left spanning two rows,
+        // name above bar on the right — so every bar starts at the same x/y
+        // no matter how long the skill name is.
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        grid-template-rows: auto auto;
+        column-gap: 16px;
+        row-gap: 10px;
+        align-items: center;
         transition: background-color 0.3s $ease, opacity 0.7s $ease, transform 0.7s $ease;
         @include reveal;
+        .clear {
+            display: none;
+        }
         h4 {
-            float: left;
-            margin: 26px 0 10px 16px;
-            text-align: center;
+            grid-column: 2;
+            grid-row: 1;
+            align-self: end;
+            margin: 0;
+            line-height: 1.2;
+            white-space: nowrap;
             font-size: $step-body;
             font-weight: 500;
             color: $ink;
         }
         img {
+            grid-column: 1;
+            grid-row: 1 / span 2;
+            display: block;
             width: 56px;
-            float: left;
-            margin: 14px 0;
+            height: 56px;
+            object-fit: contain;
             @include grayscale-reveal;
+        }
+        .level-bar {
+            grid-column: 2;
+            grid-row: 2;
+            align-self: start;
         }
         &:hover {
             background-color: $surface;
@@ -299,11 +343,9 @@ h3 {
 }
 
 .level-bar {
-    float: left;
     width: 100px;
     height: 2px;
-    margin-left: 16px;
-    margin-top: 10px;
+    margin: 0;
     background-color: $surface-2;
     .bar {
         height: 2px;
@@ -341,8 +383,24 @@ h3 {
     a {
         text-decoration: none;
     }
-    > [class*="col-"] {
-        @include reveal;
+    // Grid instead of Bootstrap floats: cards of uneven height made floats
+    // snag on taller neighbours, leaving holes and breaking the reading order.
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: start;
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (min-width: 992px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        > [class*="col-"] {
+            // Bootstrap's percentage widths would shrink cells inside the grid.
+            width: auto;
+            float: none;
+            @include reveal;
+        }
     }
     .portfolio-image {
         position: relative;
@@ -583,23 +641,27 @@ body::after {
     #slogan {
         bottom: 48px;
     }
-    .skill-item img,
-    .skill-item h4,
-    .skill-item .level-bar {
-        float: none;
-    }
-    .skill-item {
+    // Narrow screens: stack icon / name / bar in one centred column.
+    .skills .skill-item {
+        grid-template-columns: 1fr;
+        grid-template-rows: 56px auto auto;
+        justify-items: center;
         text-align: center;
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: center;
-        align-items: center;
-    }
-    .skill-item h4 {
-        margin-left: 0;
-    }
-    .level-bar {
-        margin: 10px auto 0;
+        img,
+        h4,
+        .level-bar {
+            grid-column: 1;
+        }
+        img {
+            grid-row: 1;
+        }
+        h4 {
+            grid-row: 2;
+            margin-top: 4px;
+        }
+        .level-bar {
+            grid-row: 3;
+        }
     }
     .cv-dl a {
         bottom: 20px;

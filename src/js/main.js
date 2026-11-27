@@ -7,7 +7,7 @@ import "../css/style.scss";
  */
 function initReveal() {
     const targets = document.querySelectorAll(
-        ".title, .path-block, .abouts, .skill-item, .portfolio-grid-section > [class*='col-'], .contact h4"
+        ".title, .path-block, .abouts, .skill-item, .portfolio-grid > [class*='col-'], .contact h4"
     );
 
     if (!("IntersectionObserver" in window)) {
@@ -41,7 +41,16 @@ function initStagger() {
     });
 }
 
+/** Keeps the footer copyright on the current year. */
+function initCopyrightYear() {
+    const year = document.getElementById("copyright-year");
+    if (year) {
+        year.textContent = new Date().getFullYear();
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    initCopyrightYear();
     initStagger();
     initReveal();
 });
