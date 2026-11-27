@@ -1,10 +1,74 @@
-/* all */
+/* ==========================================================================
+   Tokens — monochrome palette, one ground / one ink / one accent (white)
+   ========================================================================== */
+$bg: #0b0b0a;
+$surface: #161513;
+$surface-2: #1f1e1b;
+$ink: #f4f2ef;
+$muted: #8c8a85;
+$muted-dim: #5c5a56;
+$white: #ffffff;
+$black: #000000;
+
+$font: "Work Sans", "Noto Sans TC", -apple-system, "PingFang TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+
+$step-small: unquote("clamp(0.8125rem, 0.78rem + 0.15vw, 0.9375rem)");
+$step-body: unquote("clamp(1rem, 0.95rem + 0.25vw, 1.125rem)");
+$step-lead: unquote("clamp(1.25rem, 1.05rem + 0.75vw, 1.625rem)");
+$step-head: unquote("clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem)");
+$step-giant: unquote("clamp(3.5rem, 1.2rem + 9vw, 10rem)");
+
+$ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+@mixin grayscale-reveal {
+    filter: grayscale(1) contrast(1.05) brightness(0.92);
+    transition: filter 0.6s $ease;
+}
+
+/* Restrained entrance: fade up once, the first time a block enters view. */
+@mixin reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s $ease, transform 0.7s $ease;
+    &.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+html,
+body {
+    background: $bg;
+    color: $ink;
+}
+body {
+    font-family: $font;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}
+::selection {
+    background: $white;
+    color: $black;
+}
+a {
+    color: $ink;
+}
 .clear {
     clear: both;
 }
 .wrap {
-    width: 95%;
-    max-width: 960px;
+    width: 92%;
+    max-width: 1080px;
     margin: 0 auto;
 }
 h1 {
@@ -12,38 +76,35 @@ h1 {
     margin: 0;
 }
 h3 {
-    font-weight: bold;
-    font-family: "微軟正黑體", sans-serif;
+    font-weight: 500;
+    font-family: $font;
 }
 #logo {
-    background-image: url("../img/logo_site.png");
-    background-size: 94px 50px;
     display: block;
     height: 50px;
-    width: 94px;
+    width: 86px;
+    background: url("../img/logo_site.png") no-repeat left center;
+    background-size: 86px 36px;
+    font-size: 0;
+    overflow: hidden;
+    text-decoration: none;
 }
+
 /* Title */
 .title {
-    background-size: 240px 100px;
-    background-position: 0px;
-    font-size: 0;
     display: block;
-    width: 240px;
-    height: 100px;
-    margin: 60px auto;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-size: $step-head;
+    color: $ink;
+    margin: 0 0 56px;
+    text-align: left;
+    @include reveal;
 }
-#about-title {
-    background-image: url("../img/about.png");
-}
-#skills-title {
-    background-image: url("../img/skills.png");
-}
-#portfolio-title {
-    background-image: url("../img/portfolio.png");
-}
+
 /* Main Menu */
 #main-menu {
-    background-color: rgba(22, 72, 93, 0.9);
     height: 50px;
     z-index: 10000;
     &.fixed {
@@ -51,8 +112,8 @@ h3 {
         width: 100%;
         left: 0;
         top: 0;
-        padding: 0px 133px;
-        background-color: rgba(22, 72, 93, 0.9);
+        padding: 0 5%;
+        background-color: rgba(11, 11, 10, 0.86);
         .wrap {
             width: 100%;
             position: relative;
@@ -60,447 +121,362 @@ h3 {
     }
 }
 
-/* highlights */
+/* ==========================================================================
+   Hero
+   ========================================================================== */
 .kv-section {
     position: relative;
-    height: 540px;
-    background-color: #000;
+    height: 100vh;
+    min-height: 540px;
+    background-color: $black;
     background-size: cover;
-    text-align: center;
-    font-size: 30px;
     margin-top: 50px;
-    color: #fefefe;
-    line-height: 540px;
+    color: $ink;
     overflow: hidden;
 }
-#video-mask {
+#hero-mask {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(84, 84, 84, 0.3);
+    background: linear-gradient(180deg, rgba(11, 11, 10, 0.45) 0%, rgba(11, 11, 10, 0.15) 45%, rgba(11, 11, 10, 0.8) 100%);
+    z-index: 1;
 }
-#video {
-    object-fit: cover;
+#hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
     width: 100%;
-    background-size: cover;
-    overflow: hidden;
+    height: 100%;
+    object-fit: cover;
+    // Keep the sun and the ridge it rests on in frame on narrow screens.
+    object-position: 75% 50%;
+    filter: grayscale(1) contrast(1.05) brightness(0.8);
+    // A slow settle replaces the motion the video used to provide.
+    animation: hero-settle 2.4s $ease both;
+}
+@keyframes hero-settle {
+    from {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    #hero-image {
+        animation: none;
+    }
 }
 #slogan {
     position: absolute;
-    top: 14%;
+    left: 0;
     right: 0;
-    width: 622px;
-    height: 322px;
-    font-size: 0;
-    background: url("../img/slogan.png");
-    background-size: 857px 399px;
-    background-position: -117px 0px;
+    bottom: 64px;
+    padding: 0 5%;
+    font-size: $step-giant;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    text-transform: lowercase;
+    color: $ink;
+    white-space: nowrap;
     z-index: 2;
 }
 #scroll-down {
     position: absolute;
     bottom: 15px;
-    background: url("../img/scroll_down.png");
-    background-size: 60px 82px;
-    width: 60px;
-    height: 82px;
+    width: 24px;
+    height: 24px;
     left: 50%;
-    margin: 0 0 0 -41px;
+    margin: 0 0 0 -12px;
+    background: url("../img/chevron-down.svg") no-repeat center;
+    background-size: 24px;
     z-index: 2;
+    opacity: 0.7;
+    animation: bob 2.4s ease-in-out infinite;
 }
-/* about */
-.abouts {
-    margin: 80px 0;
-    opacity: 0;
-    h3 {
-        margin: 12px 0;
-        font-size: 24px;
+@keyframes bob {
+    0%,
+    100% {
+        transform: translateY(0);
     }
-    p {
-        line-height: 34px;
+    50% {
+        transform: translateY(6px);
     }
 }
 
-.profile {
-    p {
-        color: #16485d;
-        width: 100%;
-        font-size: 30px;
-        margin: 0 auto;
-    }
+/* ==========================================================================
+   About — a quiet sticky portrait beside the text column
+   ========================================================================== */
+.about-section {
+    padding-top: 140px;
 }
-.top-pic,
-.bottom-pic {
-    position: absolute;
-    width: 200px;
-    height: 200px;
+.skill-section {
+    padding-top: 40px;
 }
-.top-pic {
-    top: 65px;
-}
-.bottom-pic {
-    bottom: 49px;
-}
-.profile-pic img,
-.top-pic img,
-.bottom-pic img {
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-}
-.profile-pic-fixed {
-    position: fixed;
-    top: 184px;
-    left: 148px;
-    z-index: 5;
+.about {
+    display: flex;
+    align-items: flex-start;
+    gap: 56px;
 }
 .path-block {
-    height: 350px;
-    position: relative;
+    flex: 0 0 260px;
+    position: sticky;
+    top: 130px;
+    @include reveal;
 }
-.description {
-    margin: 10px 0;
+.profile-pic img {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    @include grayscale-reveal;
+    &:hover {
+        filter: grayscale(0) contrast(1) brightness(1);
+    }
 }
-/* skills */
+.description-block {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.abouts {
+    margin: 0 0 72px;
+    @include reveal;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    h3 {
+        margin: 0 0 16px;
+        font-size: $step-lead;
+        font-weight: 400;
+        color: $ink;
+    }
+    p {
+        line-height: 1.7;
+        font-size: $step-body;
+        color: $muted;
+        a {
+            color: $ink;
+            text-decoration: underline;
+        }
+    }
+}
 
+/* ==========================================================================
+   Skills
+   ========================================================================== */
 .skills {
     h3 {
-        line-height: 50px;
-        padding-left: 50px;
-        background: url("../img/list.png") no-repeat left center;
-        background-size: 50px;
-    }
-    &:hover {
-        h3 {
-            background-image: url("../img/list_hover.png");
-            background-position-y: 1px;
-            color: #103646;
+        line-height: 1;
+        padding: 0 0 20px;
+        margin: 72px 0 24px;
+        font-size: $step-lead;
+        font-weight: 400;
+        color: $ink;
+        &::before {
+            content: "";
+            display: inline-block;
+            width: 28px;
+            height: 2px;
+            background: $white;
+            margin-right: 16px;
+            vertical-align: middle;
         }
     }
     .skill-item {
-        margin: 18px 0;
+        margin: 0 0 18px;
         position: relative;
         float: left;
-        transition: box-shadow 0.2s ease-in;
-        h4 {
-            float: left;
-            margin: 26px 0px 10px 13px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #8d8d8d;
+        padding: 18px 0;
+        // Fixed slots instead of floats: icon on the left spanning two rows,
+        // name above bar on the right — so every bar starts at the same x/y
+        // no matter how long the skill name is.
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        grid-template-rows: auto auto;
+        column-gap: 16px;
+        row-gap: 10px;
+        align-items: center;
+        transition: background-color 0.3s $ease, opacity 0.7s $ease, transform 0.7s $ease;
+        @include reveal;
+        .clear {
+            display: none;
         }
-        p {
-            text-align: left;
+        h4 {
+            grid-column: 2;
+            grid-row: 1;
+            align-self: end;
+            margin: 0;
+            line-height: 1.2;
+            white-space: nowrap;
+            font-size: $step-body;
+            font-weight: 500;
+            color: $ink;
         }
         img {
-            width: 80px;
-            float: left;
-            margin: 14px 0px;
-            opacity: 0.7;
-            transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.675);
+            grid-column: 1;
+            grid-row: 1 / span 2;
+            display: block;
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            @include grayscale-reveal;
+        }
+        .level-bar {
+            grid-column: 2;
+            grid-row: 2;
+            align-self: start;
         }
         &:hover {
-            box-shadow: 7px 5px 13px 1px rgba(145, 145, 145, 1);
+            background-color: $surface;
             img {
-                opacity: 0.9;
+                filter: grayscale(0) contrast(1) brightness(1);
             }
-            &:before {
-                opacity: 1;
-                transform: scale(1.25);
-            }
-        }
-        &:before {
-            content: "circle";
-            display: block;
-            font-size: 0;
-            width: 80px;
-            height: 80px;
-            left: 70px;
-            top: 13px;
-            margin: 0 0 0 -55px;
-            position: absolute;
-            border: 5px #103646 solid;
-            border-radius: 55px;
-            opacity: 0;
-            z-index: 10;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.675),
-                opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.675);
         }
     }
 }
 
 .level-bar {
-    float: left;
     width: 100px;
-    height: 16px;
-    margin-left: 15px;
-    background-color: #73919e;
+    height: 2px;
+    margin: 0;
+    background-color: $surface-2;
     .bar {
-        height: 16px;
-        width: 50px;
-        background-color: #103646;
-        &.bar-20 {
+        height: 2px;
+        width: 0;
+        background-color: $muted;
+        transition: width 1s $ease 0.15s;
+    }
+    .skill-item.in-view & {
+        .bar-20 {
             width: 20px;
         }
-        &.bar-40 {
+        .bar-40 {
             width: 40px;
         }
-        &.bar-60 {
+        .bar-60 {
             width: 60px;
         }
-        &.bar-80 {
+        .bar-80 {
             width: 80px;
         }
-        &.bar-100 {
+        .bar-100 {
             width: 100px;
         }
     }
+    .skill-item:hover & .bar {
+        background-color: $white;
+    }
 }
 
-/* portfolio */
-.portfolio-section {
-    min-height: 620px;
-}
-.back-mask {
-    background-image: url("../img/website_design_imac.png");
-    width: 465px;
-    height: 400px;
-    background-size: 465px 400px;
-    position: absolute;
-    z-index: 2;
-}
-.mask {
-    background-image: url("../img/website_design_imac_shadow.png");
-    width: 465px;
-    height: 400px;
-    background-size: 465px;
-    background-position: 116px -92px;
-    opacity: 0.15;
-    position: absolute;
-    z-index: 3;
-}
-.outter {
-    overflow: hidden;
-    width: 425px;
-    margin: 20px;
-}
-.slide-block {
-    height: 400px;
-}
-.slide {
-    position: relative;
-    height: 250px;
-    min-width: 400px;
-}
-.slides {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    overflow: hidden;
-    &.songhub {
-        background: #000 url("../img/songhub.jpg") no-repeat center;
-        background-size: cover;
-    }
-    &.tidf {
-        background: #000 url("../img/tidf.jpg") no-repeat center;
-        background-size: cover;
-    }
-    &.aid {
-        background: #000 url("../img/aid.jpg") no-repeat center;
-        background-size: cover;
-    }
-    &.cellwine-marketplace {
-        background: #000 url("../img/marketplace.jpg") no-repeat center;
-        background-size: contain;
-    }
-    &.tt-tt {
-        background: #000 url("../img/tt.jpg") no-repeat center;
-        background-size: cover;
-    }
-    &.cet {
-        background: #000 url("../img/cet.jpg") no-repeat center;
-        background-size: cover;
-    }
-    &.gtk {
-        background: #000 url("../img/gtk.jpg") no-repeat center;
-        background-size: cover;
-    }
-    &.hennessy {
-        background: #000 url("../img/hennessy.jpg") no-repeat center;
-        background-size: cover;
-    }
-    &.im {
-        background: #000 url("../img/im.jpg") no-repeat center;
-        background-size: cover;
-    }
-}
-.slides-description {
-    display: none;
-    height: 328px;
-    padding: 0px 0 0 30px;
-}
-.slides-description p {
-    line-height: 30px;
-    margin: 25px 0;
-    height: 240px;
-}
-.slides-description h3 {
-    font-size: 22px;
-    color: #103646;
-    font-weight: bold;
-    text-align: center;
-}
-.portfolio-link {
-    color: #fff;
-    background: #73919e;
-    display: block;
-    margin: 0 auto;
-    width: 80px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-}
-.portfolio-link:hover {
-    color: #fff;
-    text-decoration: none;
-    background: #103646;
-}
-.portfolio {
-    position: relative;
-    overflow: hidden;
-    height: 200px;
-    padding: 10px;
-}
-.portfolio .inner {
-    position: relative;
-    height: 180px;
-    text-align: center;
-    line-height: 160px;
-}
-.portfolio .inner.cet {
-    background-color: #80a95a;
-}
-.portfolio span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    padding: 10px;
-    left: -120%;
-    top: 0;
-    color: #fff;
-}
-.portfolio img {
-    width: auto;
-    height: 50px;
-    vertical-align: middle;
-}
-.prev-block,
-.next-block {
-    position: relative;
-    height: 400px;
-}
-.prev,
-.next {
-    display: block;
-    font-size: 0;
-    width: 64px;
-    height: 120px;
-    background-size: 64px;
-    cursor: pointer;
-}
-.prev {
-    float: left;
-    background-image: url("../img/arrow_left.png");
-}
-.next {
-    float: right;
-    background-image: url("../img/arrow_right.png");
-}
-.prev-block .prev,
-.next-block .next {
-    position: absolute;
-    top: 50%;
-    margin-top: -60px;
-}
-.control-bar {
-    display: none;
-    height: 104px;
-}
-/* portfolio list*/
+/* ==========================================================================
+   Portfolio — one honest grid, framed like a browser window
+   ========================================================================== */
 .portfolio-grid-section {
-    .portfolio-list {
-        color: #103646;
-        text-align: center;
-        font-size: 36px;
-        margin: 24px;
-    }
+    padding-top: 140px;
     a {
         text-decoration: none;
+    }
+    // Grid instead of Bootstrap floats: cards of uneven height made floats
+    // snag on taller neighbours, leaving holes and breaking the reading order.
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: start;
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (min-width: 992px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        > [class*="col-"] {
+            // Bootstrap's percentage widths would shrink cells inside the grid.
+            width: auto;
+            float: none;
+            @include reveal;
+        }
     }
     .portfolio-image {
         position: relative;
         width: 100%;
-        height: 200px;
+        height: 220px;
         overflow: hidden;
+        background-color: $surface;
+        @include grayscale-reveal;
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: url("../img/browser-frame.svg") no-repeat top left;
+            background-size: 100% auto;
+            opacity: 0.55;
+        }
         .hover-overlay {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(11, 11, 10, 0.82);
             display: flex;
             flex-flow: column nowrap;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            font-size: 12px;
+            color: $ink;
+            font-size: $step-small;
             text-align: center;
             height: 100%;
             opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.675);
+            transition: opacity 0.4s $ease;
+            h3 {
+                font-weight: 400;
+                font-size: $step-body;
+            }
             p {
                 margin-top: 12px;
-                padding: 6px 12px;
-                border: 2px #fff solid;
+                padding: 8px 20px;
+                border: 1px solid $white;
+                letter-spacing: 0.06em;
             }
         }
         &:hover {
+            filter: grayscale(0) contrast(1) brightness(1);
             .hover-overlay {
                 opacity: 1;
-                font-size: 24px;
             }
         }
         &.tidf {
-            background: #000 url("../img/tidf.jpg") no-repeat center;
+            background: $black url("../img/tidf.jpg") no-repeat center;
             background-size: cover;
         }
         &.cellwine-marketplace {
-            background: #000 url("../img/marketplace.jpg") no-repeat center;
+            background: $black url("../img/marketplace.jpg") no-repeat center;
             background-size: contain;
         }
         &.tt-tt {
-            background: #000 url("../img/tt.jpg") no-repeat center;
+            background: $black url("../img/tt.jpg") no-repeat center;
             background-size: cover;
         }
         &.cet {
-            background: #000 url("../img/cet.jpg") no-repeat center;
+            background: $black url("../img/cet.jpg") no-repeat center;
             background-size: cover;
         }
         &.hennessy {
-            background: #000 url("../img/hennessy.jpg") no-repeat center;
+            background: $black url("../img/hennessy.jpg") no-repeat center;
             background-size: cover;
         }
         &.aid {
-            background: #000 url("../img/aid.jpg") no-repeat center;
+            background: $black url("../img/aid.jpg") no-repeat center;
             background-size: cover;
         }
         &.im {
-            background: #000 url("../img/im.jpg") no-repeat center;
+            background: $black url("../img/im.jpg") no-repeat center;
             background-size: cover;
         }
         &.gtk {
-            background: #000 url("../img/gtk.jpg") no-repeat center;
+            background: $black url("../img/gtk.jpg") no-repeat center;
             background-size: cover;
         }
         video {
@@ -508,104 +484,86 @@ h3 {
             left: 0;
             top: 0;
             width: 100%;
-            min-height: 200px;
+            min-height: 220px;
             z-index: -1;
         }
     }
     .portfolio-brief {
         box-sizing: border-box;
-        height: 280px;
-        margin-bottom: 24px;
+        margin-bottom: 40px;
+        padding-top: 20px;
         h3 {
-            color: #103646;
-            text-align: center;
-            font-size: 18px;
-            margin: 12px 0;
-            padding-bottom: 12px;
-            border-bottom: 2px solid rgba(22, 72, 93, 0.9);
+            color: $ink;
+            text-align: left;
+            font-size: $step-lead;
+            font-weight: 400;
+            margin: 0 0 16px;
         }
         p {
-            line-height: 30px;
-            padding: 0 24px 24px 24px;
+            line-height: 1.7;
+            padding: 0;
+            color: $muted;
+            font-size: $step-body;
+            a {
+                color: $ink;
+                text-decoration: underline;
+            }
         }
     }
 }
 
-/*contact*/
+/* ==========================================================================
+   Contact — always visible, quiet hover
+   ========================================================================== */
 .contact {
-    background: #4c4c4c;
-}
-.contact-block {
-    margin: 20px 0px;
+    background: $bg;
 }
 .contact p {
-    border-top: 2px solid #fff;
-    color: #fff;
+    border-top: none;
+    color: $muted;
 }
 .contact h4 {
-    font-size: 12px;
-    color: #fff;
-    border: 0px;
-    padding: 20px;
+    font-size: $step-small;
+    color: $muted;
+    border: 0;
+    padding: 32px 20px;
     margin: 0;
     text-align: center;
-}
-.click-contact {
-    cursor: pointer;
-    font-size: 0;
-    width: 128px;
-    height: 55px;
-    background-image: url("../img/contact_me.png");
-    background-size: 128px 55px;
-    background-position: 0px -2px;
-    float: right;
+    font-weight: 400;
+    @include reveal;
 }
 .contact-circle {
-    position: absolute;
-    right: 0;
-    top: -50px;
-    width: 200px;
+    position: relative;
+    float: right;
     height: 50px;
-    background-color: rgba(22, 72, 93, 0);
-    transition: top 0.2s ease-in-out;
-}
-.launch.contact-circle {
-    top: 0;
 }
 .contact-icon {
     display: block;
-    font-size: 0px;
-    width: 50px;
-    height: 50px;
-    background-size: 50px;
-    transition: transform 0.4s ease-in-out;
-}
-.contact-icon:hover {
-    transform: rotate(90deg);
-}
-#icon-block {
-    height: 50px;
-    overflow: hidden;
+    font-size: 0;
+    width: 36px;
+    height: 36px;
+    margin: 7px 0 0 10px;
+    background-size: 36px;
+    opacity: 0.75;
+    transition: opacity 0.3s $ease;
+    &:hover {
+        opacity: 1;
+    }
 }
 #facebook {
-    background-image: url(../img/icon/facebook_circle_color.png);
+    background-image: url("../img/icon/facebook.svg");
 }
 #linkedin {
-    background-image: url(../img/icon/linkedin_circle_color.png);
+    background-image: url("../img/icon/linkedin.svg");
 }
 #github {
-    background-image: url(../img/icon/github_circle_color.png);
+    background-image: url("../img/icon/github.svg");
 }
 #mail {
-    background-position: 2px 0px;
-    background-image: url(../img/icon/email_icon_tm.png);
+    background-image: url("../img/icon/mail.svg");
 }
 .icon-overlay {
-    color: #fff;
-    position: absolute;
-    left: 49px;
-    top: 15px;
-    opacity: 0;
+    display: none;
 }
 .icon-container {
     position: relative;
@@ -613,230 +571,110 @@ h3 {
 }
 .contact-nav {
     text-align: center;
+    img {
+        width: 24px;
+        opacity: 0.7;
+    }
 }
 .cv-dl a {
     position: fixed;
     display: block;
     font-size: 0;
-    width: 80px;
-    height: 80px;
-    bottom: 100px;
-    right: 10px;
-    background: url("../img/cv_download.png");
-    background-size: 80px 80px;
-}
-@media (max-width: 768px) {
-    .path-block,
-    .mask,
-    .back-mask,
-    .click-contact,
-    .prev-block,
-    .next-block,
-    #scroll-down,
-    .contact-nav {
-        display: none !important;
-    }
-    .control-bar {
+    width: 56px;
+    height: 56px;
+    bottom: 32px;
+    right: 24px;
+    border-radius: 50%;
+    background: $white;
+    transition: transform 0.3s $ease;
+    z-index: 100;
+    &::before {
+        content: "CV";
         display: block;
-    }
-    .outter {
         width: 100%;
-    }
-    .slide-block {
         height: 100%;
+        line-height: 56px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: $black;
     }
-    .slide {
-        min-width: 0;
+    &:hover {
+        transform: scale(1.08);
+    }
+}
+
+/* ==========================================================================
+   Grain overlay — tactile texture on the dark ground
+   ========================================================================== */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background: url("../img/grain.svg");
+    background-size: 64px 64px;
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+}
+
+@media (max-width: 991px) {
+    .about {
+        flex-direction: column;
+        gap: 32px;
+    }
+    .path-block {
+        position: static;
+        flex: 0 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
     #main-menu.fixed {
-        padding: 0;
-    }
-    .contact-circle {
-        top: 0;
+        padding: 0 5%;
     }
     .kv-section {
-        height: 100%;
-        line-height: 30px;
+        height: 100vh;
     }
     #slogan {
-        top: 50%;
-        right: none;
-        left: 50%;
-        width: 60%;
-        height: 40%;
-        background: url("../img/slogan.png");
-        background-size: cover;
-        transform: translate(-50%, -50%);
+        bottom: 48px;
     }
-    .skill-item img,
-    .skill-item h4,
-    .skill-item .level-bar {
-        float: none;
-    }
-    .skills {
-        .skill-item:before {
-            left: 50%;
-            margin: 0 0 0 -40px;
+    // Narrow screens: stack icon / name / bar in one centred column.
+    .skills .skill-item {
+        grid-template-columns: 1fr;
+        grid-template-rows: 56px auto auto;
+        justify-items: center;
+        text-align: center;
+        img,
+        h4,
+        .level-bar {
+            grid-column: 1;
         }
-    }
-    .skill-item {
-        text-align: center;
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .skill-item h4 {
-        margin-left: 0px;
-    }
-    .level-bar {
-        margin: 0 auto;
-    }
-    .skill-item:before {
-        left: calc(50% + 15px);
-        margin: 0 0 0 -40px;
-    }
-    .skills:before {
-        top: 8px;
-    }
-    .slides img {
-        height: 100%;
+        img {
+            grid-row: 1;
+        }
+        h4 {
+            grid-row: 2;
+            margin-top: 4px;
+        }
+        .level-bar {
+            grid-row: 3;
+        }
     }
     .cv-dl a {
-        position: initial;
-        margin: 0 auto;
-        bottom: 0;
-    }
-    .cv-dl {
-        text-align: center;
-        padding: 60px 0;
-    }
-    .cv-dl:after {
-        font-family: "微軟正黑體", sans-serif;
-        text-align: center;
-        color: #16485d;
-        font-size: 26px;
-        line-height: 46px;
-        font-weight: bold;
-        content: "Download My C.V. file!";
-    }
-    .slides-description {
-        padding: 0;
-        height: 200px;
-    }
-    .outter {
-        margin: 0 auto;
-    }
-    .portfolio-grid-section {
-        .portfolio-image {
-            .hover-overlay {
-                opacity: 1;
-                font-size: 24px;
-            }
-        }
+        bottom: 20px;
+        right: 16px;
     }
 }
-@media (min-width: 769px) and (max-width: 991px) {
-    .path-block,
-    .click-contact,
-    .prev-block,
-    .next-block,
+@media (max-width: 768px) {
     #scroll-down,
     .contact-nav {
         display: none !important;
     }
-    .control-bar {
-        display: block;
-    }
-    .back-mask,
-    .mask {
-        top: 50%;
-        left: 50%;
-        margin: -200px 0 0 -232px;
-    }
-    #main-menu {
-        padding: 0;
-    }
-    .contact-circle {
-        top: 0;
-    }
-    .kv-section {
-        height: 100%;
-        line-height: 30px;
-    }
     #slogan {
-        top: 50%;
-        left: 50%;
-        right: none;
-        width: 60%;
-        height: 40%;
-        background: url("../img/slogan.png");
-        background-size: cover;
-        transform: translate(-50%, -50%);
+        font-size: unquote("clamp(2.25rem, 1.6rem + 8vw, 3.75rem)");
+        padding-right: 100px;
     }
-    .skill-item img,
-    .skill-item h4,
-    .skill-item .level-bar {
-        float: none;
-    }
-    .skill-item {
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .skill-item h4 {
-        margin-left: 0px;
-    }
-    .level-bar {
-        margin: 0 auto;
-    }
-    .skills {
-        .skill-item:before {
-            left: 50%;
-            margin: 0 0 0 -40px;
-        }
-    }
-
-    .skills:before {
-        top: 8px;
-    }
-    .cv-dl a {
-        position: initial;
-        margin: 0 auto;
-        bottom: 0;
-    }
-    .cv-dl {
-        text-align: center;
-        padding: 60px 0;
-    }
-    .cv-dl:after {
-        font-family: "微軟正黑體", sans-serif;
-        text-align: center;
-        color: #16485d;
-        font-size: 26px;
-        line-height: 46px;
-        font-weight: bold;
-        content: "Download My C.V. file!";
-    }
-    .slides-description {
-        padding: 0;
-    }
-    .outter {
-        margin: 20px auto;
-    }
-    .portfolio-grid-section {
-        .portfolio-image {
-            .hover-overlay {
-                opacity: 1;
-                font-size: 24px;
-            }
-        }
-    }
-}
-@media (min-width: 992px) and (max-width: 1200px) {
-}
-@media (min-width: 1201px) {
 }
